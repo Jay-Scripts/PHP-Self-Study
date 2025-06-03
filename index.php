@@ -1,84 +1,76 @@
-    <!DOCTYPE html>
-    <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <link rel="stylesheet" href="./src/input.css" />
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./src/input.css" />
+</head>
 
-    <body>
-        <!-- <?php
-                $names = array('name' => '', 'asd' => '', 'asd2' => "");
-                $names['name'] = "Jay";
-                echo $names['name'];
-                ?> -->
+<body>
+    <?php
+    $username = $password = $messageUsername = $messagePassword = $loginMsgSuccess = $loginMsgFail = "";
 
-        <?php
-        $num1 = 1;
-        $num2 = 5;
-        $num3 = 2;
-        $numbers = [1, 2, 4, 5];
-        array_push($numbers, 2);
-        print_r($numbers);
 
-        $fullName = $email = $message = "";
-        $errors = array('fullName' => "", 'email' => "", 'message' => "");
-
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $fullName = $_POST['fullName'];
-            $email = $_POST['email'];
-            $message = $_POST['message'];
-
-            if (empty($fullName)) {
-                $errors['fullName'] = "Please enter a Fullname";
-            } else {
-                if (!preg_match('/^[a-zA-Z]+$/', $fullName)) {
-                    $errors['fullName'] = "Please enter a valid name";
-                }
-            }
-            if (empty($email)) {
-                $errors['email'] = "Please enter a email";
-            } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $errors['email'] = "Please enter a valid email";
-            }
-            if (empty($message)) {
-                $errors['message'] = "Please enter a Message";
-            }
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $sanitizedUserName = trim($username);
+        $sanitizedPassword = trim($password);
+        if ($sanitizedUserName === "Admin") {
+            $messageUsername = "Username Match!";
+        } else {
+            $messageUsername = "Username don't match!";
         }
-        ?>
-        <br><br><br><br><br>
-        <form action="index.php" method="post">
-            <label for="Full Name">Fullname :</label><br>
-            <input type="text" name="fullName"><br>
-            <p><?php
-                echo htmlspecialchars($errors['fullName'])
-                ?> </p>
-            <label for="email">Email :</label><br>
-            <input type="text" name="email" id="email"><br>
-            <p><?php
-                echo htmlspecialchars($errors['email'])
-                ?> </p>
-            <label for="message">Message</label><br>
-            <input type="text" name="message" id="message"> <br>
-            <p><?php
-                echo htmlspecialchars($errors['message'])
-                ?> </p>
-            <button name="submit" type="submit">Submit</button>
-        </form>
 
-        <div class="flex items-center justify-center">
-            <div class="container border-2 border-black w-[20vw] rounded-2xl p-5 bg-blue-300 text-white">
-                <?php
-                echo "Your Fullname : " . htmlspecialchars($fullName) . "<br>" .
-                    "Email : " . htmlspecialchars($email) . "<br>" .
-                    "Message : " . htmlspecialchars($message);
+        if ($sanitizedPassword == "12345") {
+            $messagePassword = "Password Match!";
+        } else {
+            $messagePassword = "Password don't match!";
+        }
 
-                ?>
-            </div>
+        if ($sanitizedUserName === "Admin" && $sanitizedPassword == "12345") {
+            $loginMsgSuccess = "Login successful, welcome admin!";
+        } else {
+            $loginMsgFail = "Invalid credentials";
+        }
+    }
+    ?>
+
+
+    <br><br><br><br><br>
+
+    <div class="flex items-center justify-center w-.5 h-0.4">
+        <div class="border-1 border-black p-4 rounded-3xl">
+            <form action="index.php" method="POST" class="text-center border-2 border-black p-5 rounded-3xl">
+                <p class="bg-green-300">
+                    <?php
+                    echo htmlspecialchars($loginMsgSuccess);
+                    ?>
+                </p>
+                <p class="bg-red-300">
+                    <?php
+                    echo htmlspecialchars($loginMsgFail);
+                    ?>
+                </p>
+                <label for="username">Username : </label>
+                <input class="m-2 border-2 border-black" type="text" name="username" value="<?php echo htmlspecialchars($username); ?>"><br>
+                <p class="bg-green-300"> <?php
+                                            echo htmlspecialchars($messageUsername);
+                                            ?></p>
+                <label for="password">Password :</label>
+                <input class="m-2 border-2 border-black" type="password" name="password" value="<?php echo htmlspecialchars($password); ?>"><br>
+                <p class="bg-green-300"> <?php
+                                            echo htmlspecialchars($messagePassword);
+                                            ?></p>
+                <br>
+                <button class="text-center bg-red-400 border-1 p-2 rounded-3xl" name="submit">Submit</button>
+            </form>
         </div>
-    </body>
+    </div>
 
-    </html>
+</body>
+
+</html>
