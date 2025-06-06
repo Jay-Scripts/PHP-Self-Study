@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -9,19 +8,21 @@
 
 </head>
 
-<body class="h-screen flex justify-center items-center flex-col">
+<body class="h-screen flex justify-center items-center flex-col bg-gray-800 text-white">
     <?php
-    $students = ['name' => "Juan Dela Cruz", 'course' => "BSIT", 'year' => 2,];
+    $products = [
+        "fruits" => ["Apple", "Strawberry", "Banana"],
+        "prices" => ["20", "50", "100"]
+    ];
 
-    foreach ($students as $student) {
-        echo $student . "<br>";
+    foreach ($products as $product => $fruits) {
+        echo "$product<br>";
+
+        foreach ($fruits as $fruit) {
+            echo "$fruit<br>";
+        }
+        echo "<br>";
     }
-    // push new assoc array
-    $students['status'] = "Active";
-
-
-
-    var_dump($students)
     ?>
 
 
