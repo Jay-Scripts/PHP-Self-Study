@@ -9,16 +9,19 @@
 
 </head>
 
-<body class="h-screen flex justify-center items-center flex-col bg-gray-800 text-white">
+<body class="h-screen flex justify-center items-center flex-col">
     <?php
-    $numbers = [1, 2, 4, 5, 76];
-    echo "sum of all numbers " . array_sum($numbers) . "<br>";
-    echo "maximum value " . max($numbers) . "<br>";
-    $desc = rsort($numbers);
+    $students = ['name' => "Juan Dela Cruz", 'course' => "BSIT", 'year' => 2,];
 
-    foreach ($numbers as $number) {
-        echo $number . "<br>";
+    foreach ($students as $student) {
+        echo $student . "<br>";
     }
+    // push new assoc array
+    $students['status'] = "Active";
+
+
+
+    var_dump($students)
     ?>
 
 
