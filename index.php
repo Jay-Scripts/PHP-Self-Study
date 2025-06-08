@@ -12,35 +12,21 @@
     <div class="flex items-center justify-center flex-col h-screen">
 
         <?php
-        $name = $message = "";
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $name = $_POST['name'];
-        }
-        function greetUser($name)
-        {
-            $hour = date("H") + 8;
-            if ($hour < 12) {
-                $greeting = "Good Morning";
-            } elseif ($hour <  18) {
-                $greeting = "Good Afternoon";
-            } else {
-                $greeting = "Good Evening";
-            }
-            $message = "$greeting, $name! Welcome to our Website.";
+        $siteName = "Pinoy Dev";
 
-            echo $message;
+        function displaySite()
+        {
+            echo "<p class='text-red-500 bg-red-300 text-center m-3'>Without Global $siteName <br> </p>"; // this will send an error because siteName var was a global variable
+
+            global $siteName;
+            echo "<p class='text-green-600 bg-green-300 text-center m-3'>With Global $siteName</p>"; // this will run because of global keyword
         }
         ?>
         <div class="border-2 border-black p-2 rounded-2xl bg-blue-300  w-[300px] m-3">
 
-            <form action="index.php" method="post" class="flex flex-col items-center justify-center gap-2  text-white">
-                <label for="name">Input your Name : </label>
-                <input type="text" name="name" id="name">
-                <button name="submit">Submit</button>
-                <p><?php
-                    echo greetUser($name);
-                    ?></p>
-            </form>
+            <p><?php
+                echo displaySite();
+                ?></p>
 
         </div>
 
@@ -50,4 +36,4 @@
 
 </body>
 
-</html>
+</ html>
