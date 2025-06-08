@@ -12,21 +12,31 @@
     <div class="flex items-center justify-center flex-col h-screen">
 
         <?php
-        $siteName = "Pinoy Dev";
-
-        function displaySite()
+        function counter()
         {
-            echo "<p class='text-red-500 bg-red-300 text-center m-3'>Without Global $siteName <br> </p>"; // this will send an error because siteName var was a global variable
-
-            global $siteName;
-            echo "<p class='text-green-600 bg-green-300 text-center m-3'>With Global $siteName</p>"; // this will run because of global keyword
+            static $count = 0; // because of this the value will remain
+            $count++;
+            echo "$count <br>";
         }
         ?>
         <div class="border-2 border-black p-2 rounded-2xl bg-blue-300  w-[300px] m-3">
 
-            <p><?php
-                echo displaySite();
-                ?></p>
+
+            <p class="text-center text-white p-4"><?php
+                                                    counter();
+                                                    echo "1st Call value ";
+                                                    counter();
+                                                    echo "2nd Call value increased";
+                                                    counter();
+                                                    echo "3rd Call value increased";
+                                                    counter();
+                                                    echo "4th Call value increased";
+                                                    counter();
+                                                    echo "5th Call value increased";
+                                                    echo $_SERVER['REMOTE_ADDR'] . " Initial Value";
+                                                    ?></p>
+
+
 
         </div>
 
